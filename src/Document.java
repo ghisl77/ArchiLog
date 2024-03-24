@@ -1,6 +1,7 @@
 public abstract class Document implements IDocument{
     private int numero;
     private String titre;
+    private Connexion connexion;
 
     @Override
     public int numero() {
