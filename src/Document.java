@@ -1,4 +1,4 @@
-public class Document implements IDocument{
+public abstract class Document implements IDocument{
     private int numero;
     private String titre;
 
