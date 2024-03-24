@@ -1,2 +1,6 @@
-public class Abonne {
+public class Abonne implements Runnable{
+    @Override
+    public void run() {
+
+    }
 }
