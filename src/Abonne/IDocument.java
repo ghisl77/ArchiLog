@@ -1,3 +1,7 @@
+package Abonne;
+
+import Abonne.Abonne;
+
 public interface IDocument {
     int numero();
     // return null si pas emprunté ou pas réservé

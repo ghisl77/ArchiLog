@@ -1,4 +1,9 @@
-public abstract class Document implements IDocument{
+package Document;
+
+import Abonne.Abonne;
+import Abonne.IDocument;
+
+public abstract class Document implements IDocument {
     private int numero;
     private String titre;
     private Abonne emprunteur;
@@ -26,7 +31,7 @@ public abstract class Document implements IDocument{
 
     @Override
     public void reservationPour(Abonne ab) {
-        assert (reserveur != null);
+        assert (reserveur != null && emprunteur == null);
         reserveur = ab;
     }
 
@@ -34,10 +39,12 @@ public abstract class Document implements IDocument{
     public void empruntPar(Abonne ab) {
         assert (emprunteur != null);
         emprunteur = ab;
+        reserveur = null;
     }
 
     @Override
     public void retour() {
         emprunteur = null;
+        reserveur = null;
     }
 }

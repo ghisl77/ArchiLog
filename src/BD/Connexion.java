@@ -1,3 +1,10 @@
+package BD;
+
+import Abonne.Abonne;
+import Document.DVD;
+import Document.Livre;
+import Abonne.IDocument;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +36,14 @@ public class Connexion {
 
             while (rs.next()) {
                 IDocument document;
-                // Créer un objet Document pour stocker les données de chaque ligne
+                // Créer un objet Document.Document pour stocker les données de chaque ligne
                 if (rs.getString("type").equals("livre")) {
                     document = new Livre(rs.getInt("numero"), rs.getString("titre"), rs.getInt("NbPages"));
                 } else {
                     document = new DVD(rs.getInt("numero"), rs.getString("titre"), rs.getBoolean("adulte"));
                 }
 
-                // Ajouter l'objet Document à la liste
+                // Ajouter l'objet Document.Document à la liste
                 listeDocuments.add(document);
             }
 

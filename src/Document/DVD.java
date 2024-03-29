@@ -1,3 +1,5 @@
+package Document;
+
 public class DVD extends Document{
     private boolean adulte;
     public DVD(int num, String titre,boolean adulte){
