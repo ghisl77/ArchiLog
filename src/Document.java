@@ -39,5 +39,6 @@ public abstract class Document implements IDocument{
     @Override
     public void retour() {
         emprunteur = null;
+        reserveur=null;
     }
 }
