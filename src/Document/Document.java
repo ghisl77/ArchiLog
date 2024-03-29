@@ -1,4 +1,9 @@
-public abstract class Document implements IDocument{
+package Document;
+
+import Abonne.Abonne;
+import Abonne.IDocument;
+
+public abstract class Document implements IDocument {
     private int numero;
     private String titre;
     private Abonne emprunteur;
