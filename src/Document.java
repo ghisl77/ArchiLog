@@ -1,11 +1,13 @@
 public abstract class Document implements IDocument{
     private int numero;
     private String titre;
-    private Connexion connexion;
-
+    public Document(int num, String titre){
+        this.numero = num;
+        this.titre = titre;
+    }
     @Override
     public int numero() {
-        return 0;
+        return this.numero;
     }
 
     @Override
