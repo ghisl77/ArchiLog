@@ -7,8 +7,8 @@ public class Main {
         Connexion con = new Connexion();
         List<IDocument> tabDoc = new ArrayList<>() ;
         List<Abonne> tabAbo = new ArrayList<>() ;
-        tabDoc = con.récupérerDoc();
-        tabAbo = con.récupérerAbo();
+        tabDoc = con.recupererDoc();
+        tabAbo = con.recupererAbo();
         System.out.println(tabDoc);
         System.out.println(tabAbo);
     }

@@ -7,7 +7,7 @@ public class Connexion {
     static final String USER = "root";
     static final String PASS = "root";
 
-    public List<IDocument> récupérerDoc() throws SQLException {
+    public List<IDocument> recupererDoc() throws SQLException {
         // Création d'une liste pour stocker les documents récupérés
         try {
             //Class.forName("oracle.jdbc.OracleDriver"); // Oracle
@@ -48,7 +48,7 @@ public class Connexion {
         }
     }
 
-    public List<Abonne> récupérerAbo() throws SQLException {
+    public List<Abonne> recupererAbo() throws SQLException {
         // Création d'une liste pour stocker les documents récupérés
         try {
             //Class.forName("oracle.jdbc.OracleDriver"); // Oracle
@@ -64,13 +64,13 @@ public class Connexion {
 
             List<Abonne> listeDocuments = new ArrayList<>();
 
-            String querySELECT = "SELECT numero FROM abonne";
+            String querySELECT = "SELECT numero, nom, date_naissance FROM abonne";
 
             PreparedStatement st = conn.prepareStatement(querySELECT);
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
-                Abonne abo = new Abonne(rs.getInt("numero"));
+                Abonne abo = new Abonne(rs.getInt("numero"), rs.getString("nom"), rs.getDate("date_naissance"));
 
                 listeDocuments.add(abo);
             }
