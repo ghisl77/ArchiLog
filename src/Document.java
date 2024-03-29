@@ -1,35 +1,43 @@
 public abstract class Document implements IDocument{
     private int numero;
     private String titre;
-    private Connexion connexion;
-
+    private Abonne emprunteur;
+    private Abonne reserveur;
+    public Document(int num, String titre){
+        this.numero = num;
+        this.titre = titre;
+        emprunteur = null;
+        reserveur = null;
+    }
     @Override
     public int numero() {
-        return 0;
+        return this.numero;
     }
 
     @Override
     public Abonne emprunteur() {
-        return null;
+        return emprunteur;
     }
 
     @Override
     public Abonne reserveur() {
-        return null;
+        return reserveur;
     }
 
     @Override
     public void reservationPour(Abonne ab) {
-
+        assert (reserveur != null);
+        reserveur = ab;
     }
 
     @Override
     public void empruntPar(Abonne ab) {
-
+        assert (emprunteur != null);
+        emprunteur = ab;
     }
 
     @Override
     public void retour() {
-
+        emprunteur = null;
     }
 }
