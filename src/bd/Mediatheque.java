@@ -21,7 +21,7 @@ public class Mediatheque {
         System.out.println(tabDoc);
         System.out.println(tabAbo);
     }
-    public static IDocument getRandomDoc(){
+    public IDocument getRandomDoc(){
 
     }
 }

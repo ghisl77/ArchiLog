@@ -45,4 +45,12 @@ public abstract class Document implements IDocument {
     public void retour() {
         emprunteur = null;
     }
+    @Override
+    public boolean occupe(Abonne abo){
+        return emprunteur != null || (reserveur != null && reserveur != abo);
+    }
+    @Override
+    public String getTitre(){
+        return this.titre;
+    }
 }
