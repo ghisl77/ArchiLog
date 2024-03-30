@@ -8,12 +8,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        Connexion con = new Connexion();
-        List<IDocument> tabDoc = new ArrayList<>() ;
-        List<Abonne> tabAbo = new ArrayList<>() ;
-        tabDoc = con.recupererDoc();
-        tabAbo = con.recupererAbo();
-        System.out.println(tabDoc);
-        System.out.println(tabAbo);
+        Mediatheque med = new Mediatheque();
     }
 }
