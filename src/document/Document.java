@@ -3,6 +3,9 @@ package document;
 import abonne.Abonne;
 import abonne.IDocument;
 
+import java.util.Date;
+import java.util.Random;
+
 public abstract class Document implements IDocument {
     private int numero;
     private String titre;
@@ -45,4 +48,16 @@ public abstract class Document implements IDocument {
     public void retour() {
         emprunteur = null;
     }
+    public boolean verifieAge(Date dateNais){
+        return true;
+    }
+    @Override
+    public String getTitre(){
+        return this.titre;
+    }
+    @Override
+    public boolean occupe(Abonne abo){
+        return emprunteur != null || (reserveur != null && reserveur != abo);
+    }
+
 }
