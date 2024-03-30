@@ -1,3 +1,5 @@
+package bd;
+
 import abonne.Abonne;
 import abonne.IDocument;
 import bd.Connexion;
