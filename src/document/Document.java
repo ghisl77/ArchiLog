@@ -1,7 +1,7 @@
-package Document;
+package document;
 
-import Abonne.Abonne;
-import Abonne.IDocument;
+import abonne.Abonne;
+import abonne.IDocument;
 
 public abstract class Document implements IDocument {
     private int numero;

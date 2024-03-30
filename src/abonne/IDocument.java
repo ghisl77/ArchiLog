@@ -1,6 +1,4 @@
-package Abonne;
-
-import Abonne.Abonne;
+package abonne;
 
 public interface IDocument {
     int numero();

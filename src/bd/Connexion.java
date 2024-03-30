@@ -1,9 +1,9 @@
-package BD;
+package bd;
 
-import Abonne.Abonne;
-import Document.DVD;
-import Document.Livre;
-import Abonne.IDocument;
+import abonne.Abonne;
+import document.DVD;
+import document.Livre;
+import abonne.IDocument;
 
 import java.sql.*;
 import java.util.ArrayList;

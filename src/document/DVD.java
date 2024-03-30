@@ -1,4 +1,4 @@
-package Document;
+package document;
 
 public class DVD extends Document{
     private boolean adulte;

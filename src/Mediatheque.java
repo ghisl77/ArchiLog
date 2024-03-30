@@ -1,6 +1,6 @@
-import Abonne.Abonne;
-import Abonne.IDocument;
-import BD.Connexion;
+import abonne.Abonne;
+import abonne.IDocument;
+import bd.Connexion;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class Mediatheque {
         System.out.println(tabDoc);
         System.out.println(tabAbo);
     }
-    public IDocument getRandomDoc(){
+    public static IDocument getRandomDoc(){
 
     }
 }

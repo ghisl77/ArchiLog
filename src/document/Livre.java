@@ -1,4 +1,4 @@
-package Document;
+package document;
 
 public class Livre extends Document{
     private int nbPages;
