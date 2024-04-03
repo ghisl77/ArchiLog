@@ -2,48 +2,78 @@ package abonne;
 
 import bd.Mediatheque;
 
-import java.sql.SQLException;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Date;
 import java.util.Random;
 
 public class Abonne implements Runnable{
+
+    private Socket socket;
     private int numero;
     private String nom;
     private Date dateNaissance;
     private Mediatheque mediatheque;
-    public Abonne(int num, String nom, Date dateNaissance) throws SQLException {
+    private IDocument currentDocument;  // The document currently borrowed by the Abonne
+
+    private String lastAction = "";  // The last action performed by the Abonne
+    public Abonne(int num, String nom, Date dateNaissance){
         numero = num;
         this.nom = nom;
         this.dateNaissance = dateNaissance;
-        mediatheque = new Mediatheque();
+        currentDocument = null;
     }
+
+    public void setMediatheque(Mediatheque mediatheque) {
+        this.mediatheque = mediatheque;
+    }
+    public String getNom() {
+        return nom;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+    private void sendRequest(String serverAddress, int serverPort, int abonne, int doc) {
+        try {
+            this.socket = new Socket(serverAddress, serverPort);
+            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+            output.println(abonne + " " + doc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void run() {
-        IDocument doc = mediatheque.getRandomDoc();
-        try{
+        IDocument doc = null;
+        try {
+            doc = mediatheque.getRandomDoc();
             while (true) {
                 Random rand = new Random();
                 int index = rand.nextInt(3);
-                synchronized (doc) {
-                    while (doc.occupe(this)) {
-                        System.out.println(doc.getTitre() + " occupe");
-                        doc.wait();
-                    }
-                    if(index == 0) {
-                        doc.reservationPour(this);
-                        System.out.println(this.nom + " a reserver " + doc.getTitre());
-                    } else if (index == 1) {
-                        doc.empruntPar(this);
-                        System.out.println(this.nom + " a emprunter " + doc.getTitre());
-                    }
-                    else
-                        doc.retour();
-                        System.out.println(this.nom + " a retoune " + doc.getTitre());
-                        doc.notifyAll();
+                if (index == 0 && !lastAction.equals("reserved")) {
+                    sendRequest("127.0.0.1", 3000, this.numero, doc.numero());
+                    lastAction = "reserved";
+                } else if (index == 1 || lastAction.equals("reserved")) {
+                    sendRequest("127.0.0.1", 4000,  this.numero, doc.numero());
+                    lastAction = "borrowed";
+                } else if (lastAction.equals("borrowed")) {
+                    sendRequest("127.0.0.1", 4000,  this.numero, doc.numero());
+                    lastAction = "returned";
                 }
+                Thread.sleep(1000);  // Pause for 1 second
             }
-        } catch (InterruptedException e) {
-            System.out.println(this.nom + " rend " + doc.getTitre());
+        } catch (Exception e) {
+            System.out.println("Thread " + Thread.currentThread().getId() + ": " + this.nom + " a terminé");
         }
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
     }
 }
