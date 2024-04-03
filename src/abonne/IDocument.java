@@ -16,4 +16,6 @@ public interface IDocument {
     boolean occupe(Abonne abo);
     String getTitre();
     boolean verifieAge(Date dateNais);
+
+    void cancelReservation();
 }

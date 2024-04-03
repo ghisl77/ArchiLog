@@ -12,7 +12,7 @@ import java.util.List;
 public class Connexion {
     static final String DB_URL = "jdbc:mysql://localhost/projetarchilog?useSSL=false"; // MySQL
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "";
 
     public List<IDocument> recupererDoc() throws SQLException {
         // Création d'une liste pour stocker les documents récupérés
@@ -25,7 +25,7 @@ public class Connexion {
         }
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("On est connecté au serveur sur la base aero");
+            System.out.println("On est connecté au serveur sur la base média, on va récupérer les documents");
 
             List<IDocument> listeDocuments = new ArrayList<>();
 
@@ -67,7 +67,7 @@ public class Connexion {
         }
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("On est connecté au serveur sur la base aero");
+            System.out.println("On est connecté au serveur sur la base mediatheque, on va récupérer les abonnés");
 
             List<Abonne> listeDocuments = new ArrayList<>();
 
