@@ -25,10 +25,8 @@ public class Mediatheque {
         for (Abonne abonne : tabAbo) {
             abonne.setMediatheque(this);
         }
-
-        System.out.println(tabDoc);
         System.out.println(tabAbo);
-        System.out.println("Mediatheque crée avec succès");
+        System.out.println(tabDoc);
     }
 
     public IDocument getRandomDoc(){

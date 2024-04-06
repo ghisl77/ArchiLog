@@ -12,8 +12,8 @@ public class ServeurER implements Runnable{
     private ServerSocket listen_socket;
     private Mediatheque media;
 
-    public ServeurER(int port, Mediatheque media) throws IOException {
-        listen_socket = new ServerSocket(port);
+    public ServeurER(int port, Mediatheque media, String ip) throws IOException {
+        listen_socket = new ServerSocket(port,50, InetAddress.getByName(ip));
         this.media = media;
     }
 

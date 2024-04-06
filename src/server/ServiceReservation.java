@@ -23,7 +23,6 @@ public class ServiceReservation implements Runnable{
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-            out.println("Veuillez reserver un document parmi la liste suivante en écrivant son numéro :");
             int numAbonne;
             Abonne abo ;
             IDocument doc;
@@ -32,6 +31,7 @@ public class ServiceReservation implements Runnable{
             abo = media.getAbonneByNumero(numAbonne);
             out.println("Connexion reussi");
             out.println(media.toStringDoc());
+            out.println("Veuillez reserver un document parmi la liste suivante en écrivant son numéro :");
             int numDoc =Integer.parseInt(in.readLine());
             if(media.getDocumentByNumero(numDoc)== null){
                 out.println("document inexistant");
@@ -39,7 +39,8 @@ public class ServiceReservation implements Runnable{
             else{
                 doc = media.getDocumentByNumero(numDoc);
                 if(doc.reserveur()==null || doc.reserveur()==abo){
-                    doc.empruntPar(abo);
+                    doc.reservationPour(abo);
+                    out.println("reservation reussie");
                 }
                 else{
                     out.println("déja reservé");

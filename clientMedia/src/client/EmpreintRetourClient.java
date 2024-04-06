@@ -18,20 +18,22 @@ public class EmpreintRetourClient {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             String str = null;
             Scanner scanner = new Scanner(System.in);
-            while(str.equals("Connexion reussie")==false){
-                str = in.readLine();
-                System.out.println(str);
-                str = scanner.nextLine();
-                out.println(str);
-            }
-            str = in.readLine();
+            str = in.readLine(); //veuillez saisir num
             System.out.println(str);
             str = scanner.nextLine();
-            out.println(str);
+            out.println(str);//envoie num
+            str = in.readLine();//connexion réussie
+            System.out.println(str);
+            str = in.readLine();//affiche emprunt ou retour
+            System.out.println(str);
+            str = scanner.nextLine();// scann num emprunt ou ret
+            out.println(str); // envoie num ret ou emp
             str = in.readLine();
             System.out.println(str);
-            str = scanner.nextLine();
+            str = scanner.nextLine();//scan num doc
             out.println(str);
+            str = in.readLine();// affichage
+            System.out.println(str);
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();

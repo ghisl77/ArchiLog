@@ -15,6 +15,7 @@ public class Connexion {
     static final String PASS = "root";
 
     public List<IDocument> recupererDoc() throws SQLException {
+        List<Abonne> listeAbonne  = this.recupererAbo();
         // Création d'une liste pour stocker les documents récupérés
         try {
             //Class.forName("oracle.jdbc.OracleDriver"); // Oracle
@@ -39,6 +40,20 @@ public class Connexion {
                 // Créer un objet Document.Document pour stocker les données de chaque ligne
                 if (rs.getString("type").equals("livre")) {
                     document = new Livre(rs.getInt("numero"), rs.getString("titre"), rs.getInt("NbPages"));
+                    /*if(rs.getInt("reservePar")!=0){
+                        for ( Abonne abo: listeAbonne){
+                            if(abo.getNumero()==rs.getInt("reservePar")){
+                                document.reservationPour(abo);
+                            }
+                        }
+                    }
+                    if(rs.getInt("empruntePar")!=0){
+                        for ( Abonne abo: listeAbonne){
+                            if(abo.getNumero()==rs.getInt("empruntPAr")){
+                                document.empruntPar(abo);
+                            }
+                        }
+                    }*/
                 } else {
                     document = new DVD(rs.getInt("numero"), rs.getString("titre"), rs.getBoolean("adulte"));
                 }
