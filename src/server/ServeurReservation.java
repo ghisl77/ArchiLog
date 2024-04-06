@@ -1,23 +1,24 @@
 package server;
 
+import bd.Mediatheque;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 
 public class ServeurReservation implements Runnable{
     private ServerSocket listen_socket;
+    private Mediatheque media;
 
-    public ServeurReservation(int port) throws IOException {
+    public ServeurReservation(int port, Mediatheque media) throws IOException {
         listen_socket = new ServerSocket(port);
+        this.media = media;
     }
 
-    // Le serveur ecoute et accepte les connexions.
-    // pour chaque connexion, il cree un ServiceInversion,
-    // qui va la traiter, et le lance
     public void run() {
         try {
             System.err.println("Lancement du serveur au port " + this.listen_socket.getLocalPort());
             while (true)
-                new Thread(new ServiceReservation(listen_socket.accept())).start();
+                new Thread(new ServiceReservation(listen_socket.accept(), media)).start();
         } catch (IOException e) {
             try {
                 this.listen_socket.close();

@@ -50,18 +50,7 @@ public class Abonne implements Runnable{
         try {
             doc = mediatheque.getRandomDoc();
             while (true) {
-                Random rand = new Random();
-                int index = rand.nextInt(3);
-                if (index == 0 && !lastAction.equals("reserved")) {
-                    sendRequest("127.0.0.1", 3000, this.numero, doc.numero());
-                    lastAction = "reserved";
-                } else if (index == 1 || lastAction.equals("reserved")) {
-                    sendRequest("127.0.0.1", 4000,  this.numero, doc.numero());
-                    lastAction = "borrowed";
-                } else if (lastAction.equals("borrowed")) {
-                    sendRequest("127.0.0.1", 4000,  this.numero, doc.numero());
-                    lastAction = "returned";
-                }
+
                 Thread.sleep(1000);  // Pause for 1 second
             }
         } catch (Exception e) {
