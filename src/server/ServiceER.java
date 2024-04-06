@@ -29,10 +29,8 @@ public class ServiceER implements Runnable{
             int numAbonne;
             Abonne abo ;
             IDocument doc;
-            do {
-                out.println("Veuiilez saisir votre numero d'abonne");
-                numAbonne = Integer.parseInt(in.readLine());
-            }while (media.getAbonneByNumero(numAbonne) == null);
+            out.println("Veuiilez saisir votre numero d'abonne");
+            numAbonne = Integer.parseInt(in.readLine());
             abo = media.getAbonneByNumero(numAbonne);
             out.println("Connexion reussi");
             out.println("Saisissez 1 si vous voulez emprunter un document ou 2 si vous voulez retourner un document");
@@ -50,12 +48,12 @@ public class ServiceER implements Runnable{
                 else {
                     doc = media.getDocumentByNumero(numDoc);
                     if(choix == 1){
-                        if(doc.emprunteur()==null) {
+                        if(doc.emprunteur()==null && (doc.emprunteur() == media.getAbonneByNumero(numAbonne) || doc.reserveur() == null)) {
                             doc.empruntPar(abo);
                             out.println("reservation faites avec succes");
                         }
                         else{
-                            out.println("déja emprunter");
+                            out.println("déja emprunter ou reserver");
                         }
                     }
                     if(choix == 2) {
@@ -63,6 +61,7 @@ public class ServiceER implements Runnable{
                             out.println("retour fais avec succes");
                     }
                 }
+            client.close();
             } catch (IOException e) {
             throw new RuntimeException(e);
         }

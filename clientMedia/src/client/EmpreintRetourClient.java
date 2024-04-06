@@ -1,7 +1,10 @@
 package client;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Scanner;
 
 public class EmpreintRetourClient {
@@ -15,10 +18,12 @@ public class EmpreintRetourClient {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             String str = null;
             Scanner scanner = new Scanner(System.in);
-            str = in.readLine();
-            System.out.println(str);
-            str = scanner.nextLine();
-            out.println(str);
+            while(str.equals("Connexion reussie")==false){
+                str = in.readLine();
+                System.out.println(str);
+                str = scanner.nextLine();
+                out.println(str);
+            }
             str = in.readLine();
             System.out.println(str);
             str = scanner.nextLine();

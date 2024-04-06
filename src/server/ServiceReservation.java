@@ -27,10 +27,8 @@ public class ServiceReservation implements Runnable{
             int numAbonne;
             Abonne abo ;
             IDocument doc;
-            do {
-                out.println("Veuiilez saisir votre numero d'abonne");
-                numAbonne = Integer.parseInt(in.readLine());
-            }while (media.getAbonneByNumero(numAbonne) == null);
+            out.println("Veuiilez saisir votre numero d'abonne");
+            numAbonne = Integer.parseInt(in.readLine());
             abo = media.getAbonneByNumero(numAbonne);
             out.println("Connexion reussi");
             out.println(media.toStringDoc());
@@ -47,6 +45,7 @@ public class ServiceReservation implements Runnable{
                     out.println("déja reservé");
                 }
             }
+            client.close();
         } catch (IOException e) {}
     }
 }

@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.Date;
 import java.util.Random;
 
-public class Abonne implements Runnable{
+public class Abonne {
 
     private Socket socket;
     private int numero;
@@ -33,36 +33,5 @@ public class Abonne implements Runnable{
 
     public int getNumero() {
         return numero;
-    }
-    private void sendRequest(String serverAddress, int serverPort, int abonne, int doc) {
-        try {
-            this.socket = new Socket(serverAddress, serverPort);
-            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
-            output.println(abonne + " " + doc);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void run() {
-        IDocument doc = null;
-        try {
-            doc = mediatheque.getRandomDoc();
-            while (true) {
-
-                Thread.sleep(1000);  // Pause for 1 second
-            }
-        } catch (Exception e) {
-            System.out.println("Thread " + Thread.currentThread().getId() + ": " + this.nom + " a terminé");
-        }
-    }
-
-    public Socket getSocket() {
-        return socket;
-    }
-
-    public void setSocket(Socket socket) {
-        this.socket = socket;
     }
 }
