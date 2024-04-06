@@ -50,17 +50,17 @@ public class ServiceER implements Runnable{
                 else {
                     doc = media.getDocumentByNumero(numDoc);
                     if(choix == 1){
-                        doc.empruntPar(abo);
-                        out.println("reservation faites avec succes");
-                    }
-                    if(choix == 2) {
-                        if(doc.emprunteur()== abo) {
-                            doc.retour();
-                            out.println("retour fais avec succes");
+                        if(doc.emprunteur()==null) {
+                            doc.empruntPar(abo);
+                            out.println("reservation faites avec succes");
                         }
                         else{
-                            out.println("vous n'etes pas l'emprunteur de se document");
+                            out.println("déja emprunter");
                         }
+                    }
+                    if(choix == 2) {
+                            doc.retour();
+                            out.println("retour fais avec succes");
                     }
                 }
             } catch (IOException e) {
