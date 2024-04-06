@@ -59,4 +59,15 @@ public class Mediatheque {
         return null;  // Return null if no matching IDocument is found
     }
 
+    public String toStringDoc(){
+        StringBuilder resultat = new StringBuilder("voici la liste des documents");
+        for (int i = 0; i < tabDoc.size(); i++) {
+            resultat.append(tabDoc.get(i));
+            if (i < tabDoc.size() - 1) {
+                resultat.append(", ");
+            }
+        }
+        return resultat.toString();
+    }
+
 }

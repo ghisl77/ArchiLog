@@ -12,7 +12,7 @@ import java.util.List;
 public class Connexion {
     static final String DB_URL = "jdbc:mysql://localhost/projetarchilog?useSSL=false"; // MySQL
     static final String USER = "root";
-    static final String PASS = "";
+    static final String PASS = "root";
 
     public List<IDocument> recupererDoc() throws SQLException {
         // Création d'une liste pour stocker les documents récupérés

@@ -1,0 +1,33 @@
+package server;
+
+import abonne.Abonne;
+import abonne.IDocument;
+import bd.Mediatheque;
+
+import java.io.*;
+import java.net.*;
+import java.util.List;
+
+public class ServeurER implements Runnable{
+    private ServerSocket listen_socket;
+    private Mediatheque media;
+
+    public ServeurER(int port, Mediatheque media) throws IOException {
+        listen_socket = new ServerSocket(port);
+        this.media = media;
+    }
+
+    public void run() {
+        try {
+            System.err.println("Lancement du serveur au port " + this.listen_socket.getLocalPort());
+            while (true)
+                new Thread(new ServiceER(listen_socket.accept(), media)).start();
+        } catch (IOException e) {
+            try {
+                this.listen_socket.close();
+            } catch (IOException e1) {
+            }
+            System.err.println("Arrêt du serveur au port " + this.listen_socket.getLocalPort());
+        }
+    }
+}
