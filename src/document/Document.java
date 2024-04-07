@@ -72,11 +72,9 @@ public abstract class Document implements IDocument {
     public boolean verifieAge(Date dateNais){
         return true;
     }
-    @Override
     public String getTitre(){
         return this.titre;
     }
-    @Override
     public boolean occupe(Abonne abo){
         return emprunteur != null || (reserveur != null && reserveur != abo);
     }

@@ -13,9 +13,4 @@ public interface IDocument {
     void empruntPar(Abonne ab);
     // retour d’un document ou annulation d‘une réservation
     void retour();
-    boolean occupe(Abonne abo);
-    String getTitre();
-    boolean verifieAge(Date dateNais);
-
-    void cancelReservation();
 }
