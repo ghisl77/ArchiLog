@@ -22,13 +22,13 @@ public class ServiceReservation implements Runnable{
         this.client = socket;
         this.media = media;
     }
-    private class TempReser extends TimerTask {
+    private class FinService extends TimerTask {
         private Thread thread;
         private IDocument doc;
 
-        public TempReser(Thread thread, IDocument doc) {
-            this.thread = thread;
+        public FinService(Thread thread,IDocument doc) {
             this.doc = doc;
+            this.thread = thread;
         }
 
         @Override
@@ -61,6 +61,8 @@ public class ServiceReservation implements Runnable{
                     if(doc.reserveur()==null || doc.reserveur()==abo){
                         if(doc.verifieAge(abo.getDate())) {
                             doc.reservationPour(abo);
+                            Timer timer = new Timer();
+                            timer.schedule(new FinService(Thread.currentThread(),doc),2 * 60 * 60 * 1000);
                             out.println("vous avez bien reservee :" + doc.getTitre());
                             media.getConnexion().reservationDoc(doc, abo);
                         }
