@@ -170,7 +170,7 @@ public class Connexion {
             System.out.println("Erreur lors de la mise à jour : " + e.getMessage());
         }
     }
-    public void retourDoc(IDocument doc,Abonne abo ){
+    public void retourDoc(IDocument doc){
         try {
             //Class.forName("oracle.jdbc.OracleDriver"); // Oracle
             Class.forName("com.mysql.jdbc.Driver");  // MySQL
