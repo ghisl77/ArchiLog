@@ -41,6 +41,7 @@ public class ServiceReservation implements Runnable{
                 if(doc.reserveur()==null || doc.reserveur()==abo){
                     doc.reservationPour(abo);
                     out.println("reservation reussie");
+                    media.getConnexion().reservationDoc(abo, doc);
                 }
                 else{
                     out.println("déja reservé");

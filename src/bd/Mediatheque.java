@@ -56,6 +56,9 @@ public class Mediatheque {
         }
         return null;  // Return null if no matching IDocument is found
     }
+    public Connexion getConnexion(){
+        return this.con;
+    }
     public String toStringDoc(){
         StringBuilder resultat = new StringBuilder("voici la liste des documents :");
         for (int i = 0; i < tabDoc.size(); i++) {
