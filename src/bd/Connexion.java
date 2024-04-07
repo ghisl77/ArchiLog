@@ -113,7 +113,7 @@ public class Connexion {
             System.err.print("ClassNotFoundException: ");
             System.err.println(e1.getMessage());
         }
-        String sql = "UPDATE abonne SET empruntePar = ? WHERE numero = ?";
+        String sql = "UPDATE documents SET empruntePar = ? WHERE Numero = ?";
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("On est connecté au serveur sur la base mediatheque, on va récupérer les abonnés");
@@ -121,6 +121,72 @@ public class Connexion {
 
                 // Assigner les nouvelles valeurs aux colonnes
                 statement.setInt(1, abo.getNumero());
+                statement.setInt(2,doc.numero() ); // Remplacer "numero_abonne_a_modifier" par le numéro de l'abonné à mettre à jour
+
+                // Exécuter la mise à jour
+                int lignesModifiees = statement.executeUpdate();
+
+                // Vérifier le nombre de lignes modifiées
+                if (lignesModifiees > 0) {
+                    System.out.println("Mise à jour effectuée avec succès !");
+                } else {
+                    System.out.println("Aucune ligne mise à jour.");
+                }
+            }
+        }catch (SQLException e) {
+            System.out.println("Erreur lors de la mise à jour : " + e.getMessage());
+        }
+    }
+    public void reservationDoc(IDocument doc,Abonne abo ){
+        try {
+            //Class.forName("oracle.jdbc.OracleDriver"); // Oracle
+            Class.forName("com.mysql.jdbc.Driver");  // MySQL
+        }
+        catch (ClassNotFoundException e1) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e1.getMessage());
+        }
+        String sql = "UPDATE documents SET rerevePar = ? WHERE Numero = ?";
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            System.out.println("On est connecté au serveur sur la base mediatheque, on va récupérer les abonnés");
+            PreparedStatement statement = conn.prepareStatement(sql); {
+
+                // Assigner les nouvelles valeurs aux colonnes
+                statement.setInt(1, abo.getNumero());
+                statement.setInt(2,doc.numero() ); // Remplacer "numero_abonne_a_modifier" par le numéro de l'abonné à mettre à jour
+
+                // Exécuter la mise à jour
+                int lignesModifiees = statement.executeUpdate();
+
+                // Vérifier le nombre de lignes modifiées
+                if (lignesModifiees > 0) {
+                    System.out.println("Mise à jour effectuée avec succès !");
+                } else {
+                    System.out.println("Aucune ligne mise à jour.");
+                }
+            }
+        }catch (SQLException e) {
+            System.out.println("Erreur lors de la mise à jour : " + e.getMessage());
+        }
+    }
+    public void retourDoc(IDocument doc,Abonne abo ){
+        try {
+            //Class.forName("oracle.jdbc.OracleDriver"); // Oracle
+            Class.forName("com.mysql.jdbc.Driver");  // MySQL
+        }
+        catch (ClassNotFoundException e1) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e1.getMessage());
+        }
+        String sql = "UPDATE documents SET rerevePar = ? WHERE Numero = ?";
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            System.out.println("On est connecté au serveur sur la base mediatheque, on va récupérer les abonnés");
+            PreparedStatement statement = conn.prepareStatement(sql); {
+
+                // Assigner les nouvelles valeurs aux colonnes
+                statement.setInt(1,0 );
                 statement.setInt(2,doc.numero() ); // Remplacer "numero_abonne_a_modifier" par le numéro de l'abonné à mettre à jour
 
                 // Exécuter la mise à jour
