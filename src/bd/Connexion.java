@@ -117,7 +117,7 @@ public class Connexion {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("On est connecté au serveur sur la base mediatheque, on va récupérer les abonnés");
-            PreparedStatement statement = conn.prepareStatement(sql)) {
+            PreparedStatement statement = conn.prepareStatement(sql); {
 
                 // Assigner les nouvelles valeurs aux colonnes
                 statement.setInt(1, abo.getNumero());

@@ -51,7 +51,7 @@ public class ServiceER implements Runnable{
                         if(doc.emprunteur()==null && (doc.emprunteur() == media.getAbonneByNumero(numAbonne) || doc.reserveur() == null)) {
                             doc.empruntPar(abo);
                             out.println("reservation faites avec succes");
-                            media.getConnexion().empruntDoc(abo, doc);
+                            media.getConnexion().empruntDoc(doc, abo);
                         }
                         else{
                             out.println("déja emprunter ou reserver");
