@@ -17,4 +17,5 @@ public interface IDocument {
     void retour();
     boolean verifieAge(Date dateNais);
     String getTitre();
+    public String getReservationTime();
 }

@@ -68,7 +68,7 @@ public class ServiceER implements Runnable{
                                     out.println("ce " +doc.getClass().getSimpleName() + " est déja empruntee ");
                                 }
                                 else {
-                                    out.println("ce " + doc.getClass().getSimpleName() + " est déja reservee");
+                                    out.println("ce " + doc.getClass().getSimpleName() +  " est réservé jusqu’à "+ doc.getReservationTime());
                                 }
                             }
                         }

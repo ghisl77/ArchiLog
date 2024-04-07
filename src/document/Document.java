@@ -3,6 +3,7 @@ package document;
 import abonne.Abonne;
 import abonne.IDocument;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
@@ -40,7 +41,10 @@ public abstract class Document implements IDocument {
         // Only allow reservation if the document is not already reserved or if it's reserved by a different Abonne
         if (reserveur == null || !reserveur.equals(ab)) {
             reserveur = ab;
-            reservationTime = new Date();  // Set the reservation time
+            Date dateActuelle = new Date();
+            // Ajouter un certain nombre de millisecondes (par exemple, 2 heures)
+            long millisAajouter = 2 * 60 * 60 * 1000; // 2 heures en millisecondes
+            reservationTime = new Date(dateActuelle.getTime() + millisAajouter);
         }
     }
 
@@ -77,6 +81,13 @@ public abstract class Document implements IDocument {
     }
     public boolean occupe(Abonne abo){
         return emprunteur != null || (reserveur != null && reserveur != abo);
+    }
+
+    public String getReservationTime() {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+        String heure = formatter.format(reservationTime);
+        return heure;
     }
 
 }

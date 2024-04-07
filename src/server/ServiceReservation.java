@@ -28,12 +28,15 @@ public class ServiceReservation implements Runnable{
 
         public FinService(Thread thread,IDocument doc) {
             this.doc = doc;
+
             this.thread = thread;
         }
 
         @Override
         public void run() {
             doc.retour();
+            media.getConnexion().retourDoc(doc);
+            System.out.println("doc retourner");
             this.thread.interrupt();
         }
     }
@@ -71,7 +74,7 @@ public class ServiceReservation implements Runnable{
                         }
                     }
                     else{
-                        out.println("ce " +doc.getClass().getSimpleName() + " est déja reservee");
+                        out.println("ce " + doc.getClass().getSimpleName() +  " est réservé jusqu’à "+ doc.getReservationTime());
                     }
                 }
             }
