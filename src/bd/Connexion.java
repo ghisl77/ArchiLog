@@ -30,7 +30,7 @@ public class Connexion {
 
             List<IDocument> listeDocuments = new ArrayList<>();
 
-            String querySELECT = "SELECT numero, titre, type, NbPages, adulte FROM documents";
+            String querySELECT = "SELECT numero, titre, type, NbPages, adulte, reservePar, empruntePar FROM documents";
 
             PreparedStatement st = conn.prepareStatement(querySELECT);
             ResultSet rs = st.executeQuery();
@@ -40,7 +40,7 @@ public class Connexion {
                 // Créer un objet Document.Document pour stocker les données de chaque ligne
                 if (rs.getString("type").equals("livre")) {
                     document = new Livre(rs.getInt("numero"), rs.getString("titre"), rs.getInt("NbPages"));
-                    /*if(rs.getInt("reservePar")!=0){
+                    if(rs.getInt("reservePar")!=0){
                         for ( Abonne abo: listeAbonne){
                             if(abo.getNumero()==rs.getInt("reservePar")){
                                 document.reservationPour(abo);
@@ -49,11 +49,11 @@ public class Connexion {
                     }
                     if(rs.getInt("empruntePar")!=0){
                         for ( Abonne abo: listeAbonne){
-                            if(abo.getNumero()==rs.getInt("empruntPAr")){
+                            if(abo.getNumero()==rs.getInt("empruntePar")){
                                 document.empruntPar(abo);
                             }
                         }
-                    }*/
+                    }
                 } else {
                     document = new DVD(rs.getInt("numero"), rs.getString("titre"), rs.getBoolean("adulte"));
                 }
@@ -102,6 +102,39 @@ public class Connexion {
         }
         catch (SQLException e) {
             return null;
+        }
+    }
+    public void empruntDoc(IDocument doc,Abonne abo ){
+        try {
+            //Class.forName("oracle.jdbc.OracleDriver"); // Oracle
+            Class.forName("com.mysql.jdbc.Driver");  // MySQL
+        }
+        catch (ClassNotFoundException e1) {
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e1.getMessage());
+        }
+        String sql = "UPDATE abonne SET empruntePar = ? WHERE numero = ?";
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            System.out.println("On est connecté au serveur sur la base mediatheque, on va récupérer les abonnés");
+            PreparedStatement statement = conn.prepareStatement(sql)) {
+
+                // Assigner les nouvelles valeurs aux colonnes
+                statement.setInt(1, abo.getNumero());
+                statement.setInt(2,doc.numero() ); // Remplacer "numero_abonne_a_modifier" par le numéro de l'abonné à mettre à jour
+
+                // Exécuter la mise à jour
+                int lignesModifiees = statement.executeUpdate();
+
+                // Vérifier le nombre de lignes modifiées
+                if (lignesModifiees > 0) {
+                    System.out.println("Mise à jour effectuée avec succès !");
+                } else {
+                    System.out.println("Aucune ligne mise à jour.");
+                }
+            }
+        }catch (SQLException e) {
+            System.out.println("Erreur lors de la mise à jour : " + e.getMessage());
         }
     }
 }
