@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class EmpreintRetourClient {
     public static void main(String[] args) {
         String serverAddress = "127.0.0.1"; // Adresse IP du serveur
-        int serverPort = 4000; // Port du serveur
+        int serverPort = 4000; // Port du serveur1
 
         try (Socket socket = new Socket(serverAddress, serverPort)) {
             System.out.println("Connected to Borrow/Return Server successfully.");
@@ -22,7 +22,7 @@ public class EmpreintRetourClient {
             System.out.println(str);
             str = scanner.nextLine();
             out.println(str);//envoie num
-            str = in.readLine();//connexion réussie
+            str = in.readLine();//connexion réus1sie
             System.out.println(str);
             str = in.readLine();//affiche emprunt ou retour
             System.out.println(str);

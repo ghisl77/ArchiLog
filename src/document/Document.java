@@ -5,6 +5,7 @@ import abonne.IDocument;
 
 import java.util.Date;
 import java.util.Random;
+import java.util.Timer;
 
 public abstract class Document implements IDocument {
     private int numero;
@@ -61,7 +62,6 @@ public abstract class Document implements IDocument {
             reservationTime = null;
         }
     }
-
 
     @Override
     public synchronized void retour() {

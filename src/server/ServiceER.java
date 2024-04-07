@@ -47,14 +47,30 @@ public class ServiceER implements Runnable{
                 }
                 else {
                     doc = media.getDocumentByNumero(numDoc);
-                    if(choix == 1){
-                        if(doc.emprunteur()==null && (doc.reserveur() == media.getAbonneByNumero(numAbonne) || doc.reserveur() == null)) {
-                            doc.empruntPar(abo);
-                            out.println("reservation faites avec succes");
-                            media.getConnexion().empruntDoc(doc, abo);
-                        }
-                        else{
-                            out.println("déja emprunter ou reserver");
+                    synchronized (doc){
+                        if(choix == 1){
+                            int numRes = 0;
+                            if(doc.reserveur()!= null){
+                                numRes = doc.reserveur().getNumero();
+                            }
+                            if(doc.emprunteur()==null && (numRes == numAbonne || doc.reserveur() == null)) {
+                                if(doc.verifieAge(abo.getDate())) {
+                                    doc.empruntPar(abo);
+                                    out.println(doc.getTitre() + " a ete empruntee avec succes");
+                                    media.getConnexion().empruntDoc(doc, abo);
+                                }
+                                else{
+                                    out.println(" vous n’avez pas l’âge pour emprunter ce DVD : " + doc.getTitre());
+                                }
+                            }
+                            else{
+                                if( doc.emprunteur()!=null){
+                                    out.println("ce " +doc.getClass().getSimpleName() + " est déja empruntee ");
+                                }
+                                else {
+                                    out.println("ce " + doc.getClass().getSimpleName() + " est déja reservee");
+                                }
+                            }
                         }
                     }
                     if(choix == 2) {

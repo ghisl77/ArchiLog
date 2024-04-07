@@ -34,4 +34,5 @@ public class Abonne {
     public int getNumero() {
         return numero;
     }
+    public Date getDate(){return dateNaissance;};
 }

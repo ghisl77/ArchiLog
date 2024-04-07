@@ -1,6 +1,8 @@
 package abonne;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Timer;
 
 public interface IDocument {
     int numero();
@@ -13,4 +15,6 @@ public interface IDocument {
     void empruntPar(Abonne ab);
     // retour d’un document ou annulation d‘une réservation
     void retour();
+    boolean verifieAge(Date dateNais);
+    String getTitre();
 }
